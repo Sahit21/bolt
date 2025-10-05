@@ -6,7 +6,6 @@ const Testimonials = () => {
     {
       name: "Sabine Meier",
       role: "Geschäftsführerin",
-      text: "Die Installation der Voice AI war reibungslos. Unser Telefonsystem wurde perfekt integriert und die KI klingt wirklich natürlich. Unsere Kunden merken oft gar nicht, dass sie mit einer KI sprechen.",
       text: "Die Implementation der Voice AI war reibungslos. Unser Telefonsystem wurde perfekt integriert und die KI klingt wirklich natürlich. Unsere Kunden merken oft gar nicht, dass sie mit einer KI sprechen.",
       rating: 5
     },
@@ -19,7 +18,6 @@ const Testimonials = () => {
     {
       name: "Thomas Keller",
       role: "Praxisinhaber",
-      text: "Die Installation war in wenigen Tagen abgeschlossen. Der Support ist hervorragend und die KI wurde perfekt auf unsere Praxis angepasst. Sehr professioneller Service.",
       text: "Die Implementation war in wenigen Tagen abgeschlossen. Der Support ist hervorragend und die KI wurde perfekt auf unsere Praxis angepasst. Sehr professioneller Service.",
       rating: 5
     }

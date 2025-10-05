@@ -6,9 +6,10 @@ import Footer from './Footer';
 
 interface ReferencesProps {
   onBack: () => void;
+  onShowAbout?: () => void;
 }
 
-const References: React.FC<ReferencesProps> = ({ onBack }) => {
+const References: React.FC<ReferencesProps> = ({ onBack, onShowAbout }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
 
@@ -42,7 +43,7 @@ const References: React.FC<ReferencesProps> = ({ onBack }) => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <button 
+              <button
                 onClick={onBack}
                 className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
               >
@@ -51,8 +52,8 @@ const References: React.FC<ReferencesProps> = ({ onBack }) => {
               <span className="text-blue-400 font-medium">
                 Referenzen
               </span>
-              <button 
-                onClick={onBack}
+              <button
+                onClick={onShowAbout}
                 className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
               >
                 Über uns
@@ -84,7 +85,7 @@ const References: React.FC<ReferencesProps> = ({ onBack }) => {
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t border-slate-700">
               <div className="flex flex-col space-y-4">
-                <button 
+                <button
                   onClick={onBack}
                   className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
                 >
@@ -93,8 +94,8 @@ const References: React.FC<ReferencesProps> = ({ onBack }) => {
                 <span className="text-blue-400 font-medium">
                   Referenzen
                 </span>
-                <button 
-                  onClick={onBack}
+                <button
+                  onClick={onShowAbout}
                   className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
                 >
                   Über uns

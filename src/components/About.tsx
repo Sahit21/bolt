@@ -6,9 +6,10 @@ import Footer from './Footer';
 
 interface AboutProps {
   onBack: () => void;
+  onShowReferences?: () => void;
 }
 
-const About: React.FC<AboutProps> = ({ onBack }) => {
+const About: React.FC<AboutProps> = ({ onBack, onShowReferences }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
 
@@ -34,14 +35,14 @@ const About: React.FC<AboutProps> = ({ onBack }) => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <button 
+              <button
                 onClick={onBack}
                 className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
               >
                 Services
               </button>
-              <button 
-                onClick={onBack}
+              <button
+                onClick={onShowReferences}
                 className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
               >
                 Referenzen
@@ -76,14 +77,14 @@ const About: React.FC<AboutProps> = ({ onBack }) => {
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t border-slate-700">
               <div className="flex flex-col space-y-4">
-                <button 
+                <button
                   onClick={onBack}
                   className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
                 >
                   Services
                 </button>
-                <button 
-                  onClick={onBack}
+                <button
+                  onClick={onShowReferences}
                   className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
                 >
                   Referenzen

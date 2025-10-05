@@ -21,11 +21,27 @@ function App() {
   const [showDatenschutz, setShowDatenschutz] = useState(false);
 
   if (showAbout) {
-    return <About onBack={() => setShowAbout(false)} />;
+    return (
+      <About
+        onBack={() => setShowAbout(false)}
+        onShowReferences={() => {
+          setShowAbout(false);
+          setShowReferences(true);
+        }}
+      />
+    );
   }
 
   if (showReferences) {
-    return <References onBack={() => setShowReferences(false)} />;
+    return (
+      <References
+        onBack={() => setShowReferences(false)}
+        onShowAbout={() => {
+          setShowReferences(false);
+          setShowAbout(true);
+        }}
+      />
+    );
   }
 
   if (showImpressum) {
