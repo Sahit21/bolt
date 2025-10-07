@@ -30,6 +30,18 @@ function App() {
           setShowAbout(false);
           setShowReferences(true);
         }}
+        onShowROICalculator={() => {
+          setShowAbout(false);
+          setShowROICalculator(true);
+        }}
+        onShowImpressum={() => {
+          setShowAbout(false);
+          setShowImpressum(true);
+        }}
+        onShowDatenschutz={() => {
+          setShowAbout(false);
+          setShowDatenschutz(true);
+        }}
       />
     );
   }
@@ -41,6 +53,18 @@ function App() {
         onShowAbout={() => {
           setShowReferences(false);
           setShowAbout(true);
+        }}
+        onShowROICalculator={() => {
+          setShowReferences(false);
+          setShowROICalculator(true);
+        }}
+        onShowImpressum={() => {
+          setShowReferences(false);
+          setShowImpressum(true);
+        }}
+        onShowDatenschutz={() => {
+          setShowReferences(false);
+          setShowDatenschutz(true);
         }}
       />
     );
@@ -58,16 +82,40 @@ function App() {
           setShowROICalculator(false);
           setShowReferences(true);
         }}
+        onShowImpressum={() => {
+          setShowROICalculator(false);
+          setShowImpressum(true);
+        }}
+        onShowDatenschutz={() => {
+          setShowROICalculator(false);
+          setShowDatenschutz(true);
+        }}
       />
     );
   }
 
   if (showImpressum) {
-    return <Impressum onBack={() => setShowImpressum(false)} />;
+    return (
+      <Impressum
+        onBack={() => setShowImpressum(false)}
+        onShowDatenschutz={() => {
+          setShowImpressum(false);
+          setShowDatenschutz(true);
+        }}
+      />
+    );
   }
 
   if (showDatenschutz) {
-    return <Datenschutz onBack={() => setShowDatenschutz(false)} />;
+    return (
+      <Datenschutz
+        onBack={() => setShowDatenschutz(false)}
+        onShowImpressum={() => {
+          setShowDatenschutz(false);
+          setShowImpressum(true);
+        }}
+      />
+    );
   }
 
   return (

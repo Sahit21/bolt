@@ -7,9 +7,12 @@ import Footer from './Footer';
 interface AboutProps {
   onBack: () => void;
   onShowReferences?: () => void;
+  onShowROICalculator?: () => void;
+  onShowImpressum?: () => void;
+  onShowDatenschutz?: () => void;
 }
 
-const About: React.FC<AboutProps> = ({ onBack, onShowReferences }) => {
+const About: React.FC<AboutProps> = ({ onBack, onShowReferences, onShowROICalculator, onShowImpressum, onShowDatenschutz }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
 
@@ -50,6 +53,12 @@ const About: React.FC<AboutProps> = ({ onBack, onShowReferences }) => {
               <span className="text-blue-400 font-medium">
                 Über uns
               </span>
+              <button
+                onClick={onShowROICalculator}
+                className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
+              >
+                ROI-Rechner
+              </button>
             </nav>
 
             {/* CTA Button */}
@@ -92,7 +101,13 @@ const About: React.FC<AboutProps> = ({ onBack, onShowReferences }) => {
                 <span className="text-blue-400 font-medium">
                   Über uns
                 </span>
-                <button 
+                <button
+                  onClick={onShowROICalculator}
+                  className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
+                >
+                  ROI-Rechner
+                </button>
+                <button
                   onClick={() => setIsCalendarOpen(true)}
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-full font-semibold flex items-center justify-center space-x-2 w-full"
                 >
@@ -272,9 +287,9 @@ const About: React.FC<AboutProps> = ({ onBack, onShowReferences }) => {
         </div>
       </div>
       
-      <Footer 
-        onShowImpressum={() => {}} 
-        onShowDatenschutz={() => {}} 
+      <Footer
+        onShowImpressum={onShowImpressum}
+        onShowDatenschutz={onShowDatenschutz}
       />
     </div>
     

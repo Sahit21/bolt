@@ -7,9 +7,11 @@ interface ROICalculatorProps {
   onBack: () => void;
   onShowAbout?: () => void;
   onShowReferences?: () => void;
+  onShowImpressum?: () => void;
+  onShowDatenschutz?: () => void;
 }
 
-const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onShowReferences }) => {
+const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onShowReferences, onShowImpressum, onShowDatenschutz }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
@@ -331,8 +333,8 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
         </div>
 
         <Footer
-          onShowImpressum={() => {}}
-          onShowDatenschutz={() => {}}
+          onShowImpressum={onShowImpressum}
+          onShowDatenschutz={onShowDatenschutz}
         />
       </div>
 

@@ -7,9 +7,12 @@ import Footer from './Footer';
 interface ReferencesProps {
   onBack: () => void;
   onShowAbout?: () => void;
+  onShowROICalculator?: () => void;
+  onShowImpressum?: () => void;
+  onShowDatenschutz?: () => void;
 }
 
-const References: React.FC<ReferencesProps> = ({ onBack, onShowAbout }) => {
+const References: React.FC<ReferencesProps> = ({ onBack, onShowAbout, onShowROICalculator, onShowImpressum, onShowDatenschutz }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
 
@@ -58,6 +61,12 @@ const References: React.FC<ReferencesProps> = ({ onBack, onShowAbout }) => {
               >
                 Über uns
               </button>
+              <button
+                onClick={onShowROICalculator}
+                className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
+              >
+                ROI-Rechner
+              </button>
             </nav>
 
             {/* CTA Button */}
@@ -100,7 +109,13 @@ const References: React.FC<ReferencesProps> = ({ onBack, onShowAbout }) => {
                 >
                   Über uns
                 </button>
-                <button 
+                <button
+                  onClick={onShowROICalculator}
+                  className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
+                >
+                  ROI-Rechner
+                </button>
+                <button
                   onClick={() => setIsCalendarOpen(true)}
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-full font-semibold flex items-center justify-center space-x-2 w-full"
                 >
@@ -124,22 +139,22 @@ const References: React.FC<ReferencesProps> = ({ onBack, onShowAbout }) => {
           </p>
           
           {/* Trustpilot Header */}
-          <div className="inline-flex items-center space-x-4 bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-slate-800 rounded-2xl p-4 sm:p-6 border border-slate-700 max-w-full">
             <div className="flex items-center space-x-2">
               <div className="flex space-x-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 text-green-500 fill-current" />
+                  <Star key={i} className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 fill-current" />
                 ))}
               </div>
-              <span className="text-2xl font-bold text-white">4.9</span>
+              <span className="text-xl sm:text-2xl font-bold text-white">4.9</span>
             </div>
-            <div className="text-left">
+            <div className="text-center sm:text-left">
               <div className="text-white font-semibold">Hervorragend</div>
               <div className="text-gray-400 text-sm">Basierend auf Bewertungen</div>
             </div>
             <button
               onClick={handleTrustpilotClick}
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold flex items-center space-x-2 transition-colors"
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold flex items-center space-x-2 transition-colors whitespace-nowrap"
             >
               <span>Trustpilot</span>
               <ExternalLink className="w-4 h-4" />
@@ -218,9 +233,9 @@ const References: React.FC<ReferencesProps> = ({ onBack, onShowAbout }) => {
         </div>
       </div>
       
-      <Footer 
-        onShowImpressum={() => {}} 
-        onShowDatenschutz={() => {}} 
+      <Footer
+        onShowImpressum={onShowImpressum}
+        onShowDatenschutz={onShowDatenschutz}
       />
     </div>
     

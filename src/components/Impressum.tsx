@@ -6,9 +6,10 @@ import Footer from './Footer';
 
 interface ImpressumProps {
   onBack: () => void;
+  onShowDatenschutz?: () => void;
 }
 
-const Impressum: React.FC<ImpressumProps> = ({ onBack }) => {
+const Impressum: React.FC<ImpressumProps> = ({ onBack, onShowDatenschutz }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
 
@@ -172,9 +173,9 @@ const Impressum: React.FC<ImpressumProps> = ({ onBack }) => {
         </div>
       </div>
       
-      <Footer 
-        onShowImpressum={() => {}} 
-        onShowDatenschutz={() => {}} 
+      <Footer
+        onShowImpressum={() => {}}
+        onShowDatenschutz={onShowDatenschutz}
       />
     </div>
     
