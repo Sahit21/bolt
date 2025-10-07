@@ -164,71 +164,63 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
 
               <div className="space-y-8">
                 <div>
-                  <div className="flex justify-between items-baseline mb-3">
-                    <label className="text-gray-300 text-sm font-medium">
-                      Anrufe pro Woche
-                    </label>
-                    <div className="flex items-baseline space-x-2">
-                      <input
-                        type="number"
-                        value={callsPerWeek}
-                        onChange={(e) => setCallsPerWeek(Math.max(0, Number(e.target.value)))}
-                        className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
-                      />
-                      <span className="text-gray-400 text-sm">Anrufe</span>
-                    </div>
+                  <label className="block text-gray-300 text-sm font-medium mb-3">
+                    Anrufe pro Woche
+                  </label>
+                  <div className="flex items-baseline space-x-2 justify-end">
+                    <input
+                      type="number"
+                      value={callsPerWeek}
+                      onChange={(e) => setCallsPerWeek(Math.max(0, Number(e.target.value)))}
+                      className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                    />
+                    <span className="text-gray-400 text-sm w-16">Anrufe</span>
                   </div>
                 </div>
 
                 <div>
-                  <div className="flex justify-between items-baseline mb-3">
-                    <label className="text-gray-300 text-sm font-medium">
-                      % nicht beantwortete Anrufe innerhalb und außerhalb der Geschäftszeiten
-                    </label>
-                    <div className="flex items-baseline space-x-2">
-                      <input
-                        type="number"
-                        value={unansweredPercent}
-                        onChange={(e) => setUnansweredPercent(Math.max(0, Math.min(100, Number(e.target.value))))}
-                        className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-20 border border-slate-600 focus:border-blue-500 focus:outline-none"
-                      />
-                      <span className="text-gray-400 text-sm">%</span>
-                    </div>
+                  <label className="block text-gray-300 text-sm font-medium mb-3">
+                    % nicht beantwortete Anrufe innerhalb und außerhalb der Geschäftszeiten
+                  </label>
+                  <div className="flex items-baseline space-x-2 justify-end">
+                    <input
+                      type="number"
+                      value={unansweredPercent}
+                      onChange={(e) => setUnansweredPercent(Math.max(0, Math.min(100, Number(e.target.value))))}
+                      className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                    />
+                    <span className="text-gray-400 text-sm w-16">%</span>
                   </div>
                 </div>
 
                 <div>
-                  <div className="flex justify-between items-baseline mb-3">
-                    <label className="text-gray-300 text-sm font-medium">
-                      Durchschnittliche Bearbeitungszeit
-                    </label>
-                    <div className="flex items-baseline space-x-2">
-                      <input
-                        type="number"
-                        value={avgProcessingTime}
-                        onChange={(e) => setAvgProcessingTime(Math.max(0, Number(e.target.value)))}
-                        className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-20 border border-slate-600 focus:border-blue-500 focus:outline-none"
-                      />
-                      <span className="text-gray-400 text-sm">Minuten</span>
-                    </div>
+                  <label className="block text-gray-300 text-sm font-medium mb-3">
+                    Durchschnittliche Bearbeitungszeit
+                  </label>
+                  <div className="flex items-baseline space-x-2 justify-end">
+                    <input
+                      type="number"
+                      value={avgProcessingTime}
+                      onChange={(e) => setAvgProcessingTime(Math.max(0, Number(e.target.value)))}
+                      className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                    />
+                    <span className="text-gray-400 text-sm w-16">Minuten</span>
                   </div>
                 </div>
 
                 <div>
-                  <div className="flex justify-between items-baseline mb-3">
-                    <label className="text-gray-300 text-sm font-medium">
-                      Stundenlohn Mitarbeiter
-                    </label>
-                    <div className="flex items-baseline space-x-2">
-                      <span className="text-gray-400 text-sm">€</span>
-                      <input
-                        type="number"
-                        value={hourlyWage}
-                        onChange={(e) => setHourlyWage(Math.max(0, Number(e.target.value)))}
-                        className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
-                      />
-                      <span className="text-gray-400 text-sm">/Std</span>
-                    </div>
+                  <label className="block text-gray-300 text-sm font-medium mb-3">
+                    Stundenlohn Mitarbeiter
+                  </label>
+                  <div className="flex items-baseline space-x-2 justify-end">
+                    <span className="text-gray-400 text-sm">€</span>
+                    <input
+                      type="number"
+                      value={hourlyWage}
+                      onChange={(e) => setHourlyWage(Math.max(0, Number(e.target.value)))}
+                      className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                    />
+                    <span className="text-gray-400 text-sm w-16">/Std</span>
                   </div>
                 </div>
               </div>
