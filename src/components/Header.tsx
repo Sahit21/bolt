@@ -6,9 +6,10 @@ import About from './About';
 interface HeaderProps {
   onShowAbout?: () => void;
   onShowReferences?: () => void;
+  onShowROICalculator?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onShowAbout, onShowReferences }) => {
+const Header: React.FC<HeaderProps> = ({ onShowAbout, onShowReferences, onShowROICalculator }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
@@ -31,17 +32,23 @@ const Header: React.FC<HeaderProps> = ({ onShowAbout, onShowReferences }) => {
             <a href="#services" className="text-gray-300 hover:text-blue-400 transition-colors font-medium">
               Services
             </a>
-            <button 
+            <button
               onClick={onShowReferences}
               className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
             >
               Referenzen
             </button>
-            <button 
+            <button
               onClick={onShowAbout}
               className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
             >
               Über uns
+            </button>
+            <button
+              onClick={onShowROICalculator}
+              className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
+            >
+              ROI-Rechner
             </button>
           </nav>
 
@@ -73,19 +80,25 @@ const Header: React.FC<HeaderProps> = ({ onShowAbout, onShowReferences }) => {
               <a href="#services" className="text-gray-300 hover:text-blue-400 transition-colors font-medium">
                 Services
               </a>
-             <button 
-               onClick={onShowReferences}
-               className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
-             >
+              <button
+                onClick={onShowReferences}
+                className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
+              >
                 Referenzen
-             </button>
-              <button 
+              </button>
+              <button
                 onClick={onShowAbout}
                 className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
               >
                 Über uns
               </button>
-              <button 
+              <button
+                onClick={onShowROICalculator}
+                className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
+              >
+                ROI-Rechner
+              </button>
+              <button
                 onClick={() => setIsCalendarOpen(true)}
                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-full font-semibold flex items-center justify-center space-x-2 w-full"
               >

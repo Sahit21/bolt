@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Header from './components/Header';
 import About from './components/About';
 import References from './components/References';
+import ROICalculator from './components/ROICalculator';
 import Impressum from './components/Impressum';
 import Datenschutz from './components/Datenschutz';
 import Hero from './components/Hero';
@@ -17,6 +18,7 @@ import Footer from './components/Footer';
 function App() {
   const [showAbout, setShowAbout] = useState(false);
   const [showReferences, setShowReferences] = useState(false);
+  const [showROICalculator, setShowROICalculator] = useState(false);
   const [showImpressum, setShowImpressum] = useState(false);
   const [showDatenschutz, setShowDatenschutz] = useState(false);
 
@@ -44,6 +46,22 @@ function App() {
     );
   }
 
+  if (showROICalculator) {
+    return (
+      <ROICalculator
+        onBack={() => setShowROICalculator(false)}
+        onShowAbout={() => {
+          setShowROICalculator(false);
+          setShowAbout(true);
+        }}
+        onShowReferences={() => {
+          setShowROICalculator(false);
+          setShowReferences(true);
+        }}
+      />
+    );
+  }
+
   if (showImpressum) {
     return <Impressum onBack={() => setShowImpressum(false)} />;
   }
@@ -54,9 +72,10 @@ function App() {
 
   return (
     <div className="min-h-screen">
-      <Header 
+      <Header
         onShowAbout={() => setShowAbout(true)}
         onShowReferences={() => setShowReferences(true)}
+        onShowROICalculator={() => setShowROICalculator(true)}
       />
       <Hero />
       <AITypes />
@@ -65,7 +84,7 @@ function App() {
       <Testimonials />
       <Services />
       <FAQ />
-      <Footer 
+      <Footer
         onShowImpressum={() => setShowImpressum(true)}
         onShowDatenschutz={() => setShowDatenschutz(true)}
       />
