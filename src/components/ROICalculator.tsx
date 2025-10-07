@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, TrendingUp, ArrowRight, Calendar, Menu, X } from 'lucide-react';
+import { Calculator, TrendingUp, ArrowRight, Calendar, Menu, X, Users, Clock, DollarSign } from 'lucide-react';
 import CalendarPopup from './CalendarPopup';
 import Footer from './Footer';
 
@@ -13,18 +13,18 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
-  const [employees, setEmployees] = useState(50);
-  const [avgSalary, setAvgSalary] = useState(45000);
-  const [customerCalls, setCustomerCalls] = useState(1000);
-  const [avgCallDuration, setAvgCallDuration] = useState(8);
-  const [monthlyCustomerSupport, setMonthlyCustomerSupport] = useState(5000);
+  const [callsPerWeek, setCallsPerWeek] = useState(180);
+  const [unansweredPercent, setUnansweredPercent] = useState(20);
+  const [avgProcessingTime, setAvgProcessingTime] = useState(5);
+  const [hourlyWage, setHourlyWage] = useState(26);
 
   const [results, setResults] = useState({
-    timeSaved: 0,
-    costSavings: 0,
-    roi: 0,
-    paybackMonths: 0,
-    yearlyBenefit: 0
+    monthlyTimeSaved: 0,
+    monthlyPersonnelSavings: 0,
+    monthlyMoreCalls: 0,
+    yearlyTimeSaved: 0,
+    yearlyPersonnelSavings: 0,
+    yearlyMoreCalls: 0
   });
 
   useEffect(() => {
@@ -32,26 +32,33 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
   }, []);
 
   useEffect(() => {
-    const avgHourlyRate = avgSalary / 12 / 160;
-    const callTimeHours = (customerCalls * avgCallDuration) / 60;
-    const automationRate = 0.7;
-    const timeSavedHours = callTimeHours * automationRate;
-    const monthlyCostSavings = (timeSavedHours * avgHourlyRate) + (monthlyCustomerSupport * 0.4);
-    const implementationCost = 8000;
-    const monthlyCost = 500;
-    const netMonthlySavings = monthlyCostSavings - monthlyCost;
-    const paybackMonths = implementationCost / netMonthlySavings;
-    const yearlyBenefit = netMonthlySavings * 12;
-    const roi = ((yearlyBenefit - implementationCost) / implementationCost) * 100;
+    const automationRate = 0.8;
+    const weeksPerMonth = 4.33;
+    const monthsPerYear = 12;
+
+    const totalCallsPerWeek = callsPerWeek;
+    const answeredCallsPerWeek = totalCallsPerWeek * (1 - unansweredPercent / 100);
+
+    const timeSavedPerWeekHours = (answeredCallsPerWeek * avgProcessingTime / 60) * automationRate;
+    const monthlyTimeSaved = timeSavedPerWeekHours * weeksPerMonth;
+    const yearlyTimeSaved = monthlyTimeSaved * monthsPerYear;
+
+    const monthlyPersonnelSavings = monthlyTimeSaved * hourlyWage;
+    const yearlyPersonnelSavings = yearlyTimeSaved * hourlyWage;
+
+    const unansweredCallsPerWeek = totalCallsPerWeek * (unansweredPercent / 100);
+    const monthlyMoreCalls = unansweredCallsPerWeek * weeksPerMonth;
+    const yearlyMoreCalls = monthlyMoreCalls * monthsPerYear;
 
     setResults({
-      timeSaved: Math.round(timeSavedHours),
-      costSavings: Math.round(monthlyCostSavings),
-      roi: Math.round(roi),
-      paybackMonths: Math.round(paybackMonths * 10) / 10,
-      yearlyBenefit: Math.round(yearlyBenefit)
+      monthlyTimeSaved: Math.round(monthlyTimeSaved),
+      monthlyPersonnelSavings: Math.round(monthlyPersonnelSavings),
+      monthlyMoreCalls: Math.round(monthlyMoreCalls),
+      yearlyTimeSaved: Math.round(yearlyTimeSaved * 10) / 10,
+      yearlyPersonnelSavings: Math.round(yearlyPersonnelSavings),
+      yearlyMoreCalls: Math.round(yearlyMoreCalls)
     });
-  }, [employees, avgSalary, customerCalls, avgCallDuration, monthlyCustomerSupport]);
+  }, [callsPerWeek, unansweredPercent, avgProcessingTime, hourlyWage]);
 
   return (
     <>
@@ -103,7 +110,7 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
               </div>
 
               <button
-                className="md:hidden p-2"
+                className="md:hidden p-2 text-white"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -147,181 +154,174 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
           </div>
         </header>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-3xl mb-6">
-              <Calculator className="w-10 h-10 text-white" />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              ROI-Rechner
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Berechnen Sie den Return on Investment für Ihre KI-Implementation
-            </p>
-          </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50">
+              <div className="flex items-center space-x-3 mb-8">
+                <Users className="w-6 h-6 text-blue-400" />
+                <h2 className="text-xl font-semibold text-white">Ihre Eingaben</h2>
+              </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="bg-slate-800 rounded-3xl p-8 border border-slate-700">
-              <h2 className="text-2xl font-bold text-white mb-6">Ihre Eingaben</h2>
-
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <div>
-                  <label className="block text-gray-300 font-medium mb-3">
-                    Anzahl Mitarbeiter: <span className="text-blue-400">{employees}</span>
-                  </label>
-                  <input
-                    type="range"
-                    min="10"
-                    max="500"
-                    value={employees}
-                    onChange={(e) => setEmployees(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                  />
-                  <div className="flex justify-between text-sm text-gray-500 mt-1">
-                    <span>10</span>
-                    <span>500</span>
+                  <div className="flex justify-between items-baseline mb-3">
+                    <label className="text-gray-300 text-sm font-medium">
+                      Anrufe pro Woche
+                    </label>
+                    <div className="flex items-baseline space-x-2">
+                      <input
+                        type="number"
+                        value={callsPerWeek}
+                        onChange={(e) => setCallsPerWeek(Math.max(0, Number(e.target.value)))}
+                        className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                      />
+                      <span className="text-gray-400 text-sm">Anrufe</span>
+                    </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 font-medium mb-3">
-                    Durchschnittliches Jahresgehalt: <span className="text-blue-400">€{avgSalary.toLocaleString()}</span>
-                  </label>
-                  <input
-                    type="range"
-                    min="30000"
-                    max="100000"
-                    step="5000"
-                    value={avgSalary}
-                    onChange={(e) => setAvgSalary(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                  />
-                  <div className="flex justify-between text-sm text-gray-500 mt-1">
-                    <span>€30.000</span>
-                    <span>€100.000</span>
+                  <div className="flex justify-between items-baseline mb-3">
+                    <label className="text-gray-300 text-sm font-medium">
+                      % nicht beantwortete Anrufe innerhalb und außerhalb der Geschäftszeiten
+                    </label>
+                    <div className="flex items-baseline space-x-2">
+                      <input
+                        type="number"
+                        value={unansweredPercent}
+                        onChange={(e) => setUnansweredPercent(Math.max(0, Math.min(100, Number(e.target.value))))}
+                        className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-20 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                      />
+                      <span className="text-gray-400 text-sm">%</span>
+                    </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 font-medium mb-3">
-                    Kundenanrufe pro Monat: <span className="text-blue-400">{customerCalls.toLocaleString()}</span>
-                  </label>
-                  <input
-                    type="range"
-                    min="100"
-                    max="10000"
-                    step="100"
-                    value={customerCalls}
-                    onChange={(e) => setCustomerCalls(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                  />
-                  <div className="flex justify-between text-sm text-gray-500 mt-1">
-                    <span>100</span>
-                    <span>10.000</span>
+                  <div className="flex justify-between items-baseline mb-3">
+                    <label className="text-gray-300 text-sm font-medium">
+                      Durchschnittliche Bearbeitungszeit
+                    </label>
+                    <div className="flex items-baseline space-x-2">
+                      <input
+                        type="number"
+                        value={avgProcessingTime}
+                        onChange={(e) => setAvgProcessingTime(Math.max(0, Number(e.target.value)))}
+                        className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-20 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                      />
+                      <span className="text-gray-400 text-sm">Minuten</span>
+                    </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 font-medium mb-3">
-                    Durchschnittliche Anrufdauer: <span className="text-blue-400">{avgCallDuration} Min.</span>
-                  </label>
-                  <input
-                    type="range"
-                    min="2"
-                    max="30"
-                    value={avgCallDuration}
-                    onChange={(e) => setAvgCallDuration(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                  />
-                  <div className="flex justify-between text-sm text-gray-500 mt-1">
-                    <span>2 Min.</span>
-                    <span>30 Min.</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-gray-300 font-medium mb-3">
-                    Monatliche Kosten Kundenservice: <span className="text-blue-400">€{monthlyCustomerSupport.toLocaleString()}</span>
-                  </label>
-                  <input
-                    type="range"
-                    min="1000"
-                    max="50000"
-                    step="1000"
-                    value={monthlyCustomerSupport}
-                    onChange={(e) => setMonthlyCustomerSupport(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                  />
-                  <div className="flex justify-between text-sm text-gray-500 mt-1">
-                    <span>€1.000</span>
-                    <span>€50.000</span>
+                  <div className="flex justify-between items-baseline mb-3">
+                    <label className="text-gray-300 text-sm font-medium">
+                      Stundenlohn Mitarbeiter
+                    </label>
+                    <div className="flex items-baseline space-x-2">
+                      <span className="text-gray-400 text-sm">€</span>
+                      <input
+                        type="number"
+                        value={hourlyWage}
+                        onChange={(e) => setHourlyWage(Math.max(0, Number(e.target.value)))}
+                        className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                      />
+                      <span className="text-gray-400 text-sm">/Std</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="space-y-6">
-              <div className="bg-gradient-to-br from-blue-900 to-purple-900 rounded-3xl p-8 border border-blue-700">
-                <div className="flex items-center space-x-3 mb-4">
-                  <TrendingUp className="w-8 h-8 text-blue-400" />
-                  <h2 className="text-2xl font-bold text-white">Ihre Ergebnisse</h2>
-                </div>
+              <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-lg font-semibold text-white mb-6">Monatliche Einsparungen</h3>
 
-                <div className="space-y-6">
-                  <div className="bg-slate-800/50 rounded-2xl p-6">
-                    <div className="text-gray-300 text-sm mb-2">Monatlich gesparte Zeit</div>
-                    <div className="text-4xl font-bold text-white">{results.timeSaved} Stunden</div>
-                  </div>
-
-                  <div className="bg-slate-800/50 rounded-2xl p-6">
-                    <div className="text-gray-300 text-sm mb-2">Monatliche Kostenersparnis</div>
-                    <div className="text-4xl font-bold text-green-400">€{results.costSavings.toLocaleString()}</div>
-                  </div>
-
-                  <div className="bg-slate-800/50 rounded-2xl p-6">
-                    <div className="text-gray-300 text-sm mb-2">Jährlicher Nutzen</div>
-                    <div className="text-4xl font-bold text-green-400">€{results.yearlyBenefit.toLocaleString()}</div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-slate-800/50 rounded-2xl p-6">
-                      <div className="text-gray-300 text-sm mb-2">ROI</div>
-                      <div className="text-3xl font-bold text-blue-400">{results.roi}%</div>
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-6 h-6 text-blue-400" />
                     </div>
+                    <div className="flex-1">
+                      <div className="text-gray-400 text-sm mb-1">Zeitersparnis</div>
+                      <div className="text-2xl font-bold text-white">{results.monthlyTimeSaved} Stunden</div>
+                    </div>
+                  </div>
 
-                    <div className="bg-slate-800/50 rounded-2xl p-6">
-                      <div className="text-gray-300 text-sm mb-2">Amortisation</div>
-                      <div className="text-3xl font-bold text-purple-400">{results.paybackMonths} Monate</div>
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <DollarSign className="w-6 h-6 text-green-400" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-gray-400 text-sm mb-1">Personalkostenersparnis</div>
+                      <div className="text-2xl font-bold text-white">€{results.monthlyPersonnelSavings.toLocaleString()}</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <TrendingUp className="w-6 h-6 text-purple-400" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-gray-400 text-sm mb-1">Mehr entgegengenommene Anrufe</div>
+                      <div className="text-2xl font-bold text-white">{results.monthlyMoreCalls} Anrufe</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-slate-800 rounded-3xl p-8 border border-slate-700">
-                <h3 className="text-xl font-bold text-white mb-4">Was bedeutet das?</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
-                    <span>Ihre Investition amortisiert sich in etwa {results.paybackMonths} Monaten</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
-                    <span>Sie sparen monatlich ca. {results.timeSaved} Arbeitsstunden</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
-                    <span>Jährliche Kostenersparnis von über €{results.yearlyBenefit.toLocaleString()}</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
-                    <span>ROI von {results.roi}% nach dem ersten Jahr</span>
-                  </li>
-                </ul>
+              <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 border border-blue-500/50">
+                <h3 className="text-lg font-semibold text-white mb-6">Jährliche Einsparungen</h3>
+
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-blue-100 text-sm">Zeitersparnis</span>
+                    <span className="text-xl font-bold text-white">{results.yearlyTimeSaved} Std</span>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-blue-100 text-sm">Personalkostenersparnis</span>
+                    <span className="text-xl font-bold text-white">€ {results.yearlyPersonnelSavings.toLocaleString()}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-blue-100 text-sm">Mehr entgegengenommene Anrufe</span>
+                    <span className="text-xl font-bold text-white">{results.yearlyMoreCalls} Anrufe</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-12 bg-gradient-to-br from-slate-800 to-blue-900 rounded-3xl p-12 border border-slate-700 text-center">
+          <div className="mt-8 bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50">
+            <h3 className="text-xl font-semibold text-white mb-6">Wie wird der ROI berechnet?</h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <h4 className="text-blue-400 font-medium mb-2">Zeitersparnis:</h4>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Automatisierung von 80% der Anrufe spart wertvolle Arbeitszeit.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="text-blue-400 font-medium mb-2">Personalkostenersparnis:</h4>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Eingesparte Stunden × Stundenlohn = direkte Kostenreduktion.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="text-blue-400 font-medium mb-2">Umsatzsteigerung:</h4>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  24/7-Erreichbarkeit wandelt unbeantwortete Anrufe in Umsatz um.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 bg-gradient-to-br from-slate-800 to-blue-900 rounded-2xl p-12 border border-slate-700 text-center">
             <h3 className="text-3xl font-bold text-white mb-4">
               Bereit, diese Vorteile zu realisieren?
             </h3>
