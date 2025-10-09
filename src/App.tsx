@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import About from './components/About';
 import References from './components/References';
@@ -15,115 +15,15 @@ import Services from './components/Services';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 
-function App() {
-  const [showAbout, setShowAbout] = useState(false);
-  const [showReferences, setShowReferences] = useState(false);
-  const [showROICalculator, setShowROICalculator] = useState(false);
-  const [showImpressum, setShowImpressum] = useState(false);
-  const [showDatenschutz, setShowDatenschutz] = useState(false);
-
-  if (showAbout) {
-    return (
-      <About
-        onBack={() => setShowAbout(false)}
-        onShowReferences={() => {
-          setShowAbout(false);
-          setShowReferences(true);
-        }}
-        onShowROICalculator={() => {
-          setShowAbout(false);
-          setShowROICalculator(true);
-        }}
-        onShowImpressum={() => {
-          setShowAbout(false);
-          setShowImpressum(true);
-        }}
-        onShowDatenschutz={() => {
-          setShowAbout(false);
-          setShowDatenschutz(true);
-        }}
-      />
-    );
-  }
-
-  if (showReferences) {
-    return (
-      <References
-        onBack={() => setShowReferences(false)}
-        onShowAbout={() => {
-          setShowReferences(false);
-          setShowAbout(true);
-        }}
-        onShowROICalculator={() => {
-          setShowReferences(false);
-          setShowROICalculator(true);
-        }}
-        onShowImpressum={() => {
-          setShowReferences(false);
-          setShowImpressum(true);
-        }}
-        onShowDatenschutz={() => {
-          setShowReferences(false);
-          setShowDatenschutz(true);
-        }}
-      />
-    );
-  }
-
-  if (showROICalculator) {
-    return (
-      <ROICalculator
-        onBack={() => setShowROICalculator(false)}
-        onShowAbout={() => {
-          setShowROICalculator(false);
-          setShowAbout(true);
-        }}
-        onShowReferences={() => {
-          setShowROICalculator(false);
-          setShowReferences(true);
-        }}
-        onShowImpressum={() => {
-          setShowROICalculator(false);
-          setShowImpressum(true);
-        }}
-        onShowDatenschutz={() => {
-          setShowROICalculator(false);
-          setShowDatenschutz(true);
-        }}
-      />
-    );
-  }
-
-  if (showImpressum) {
-    return (
-      <Impressum
-        onBack={() => setShowImpressum(false)}
-        onShowDatenschutz={() => {
-          setShowImpressum(false);
-          setShowDatenschutz(true);
-        }}
-      />
-    );
-  }
-
-  if (showDatenschutz) {
-    return (
-      <Datenschutz
-        onBack={() => setShowDatenschutz(false)}
-        onShowImpressum={() => {
-          setShowDatenschutz(false);
-          setShowImpressum(true);
-        }}
-      />
-    );
-  }
+function HomePage() {
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen">
       <Header
-        onShowAbout={() => setShowAbout(true)}
-        onShowReferences={() => setShowReferences(true)}
-        onShowROICalculator={() => setShowROICalculator(true)}
+        onShowAbout={() => navigate('/uber-uns')}
+        onShowReferences={() => navigate('/referenzen')}
+        onShowROICalculator={() => navigate('/roi-rechner')}
       />
       <Hero />
       <AITypes />
@@ -133,10 +33,87 @@ function App() {
       <Services />
       <FAQ />
       <Footer
-        onShowImpressum={() => setShowImpressum(true)}
-        onShowDatenschutz={() => setShowDatenschutz(true)}
+        onShowImpressum={() => navigate('/impressum')}
+        onShowDatenschutz={() => navigate('/datenschutz')}
       />
     </div>
+  );
+}
+
+function AboutPage() {
+  const navigate = useNavigate();
+
+  return (
+    <About
+      onBack={() => navigate('/')}
+      onShowReferences={() => navigate('/referenzen')}
+      onShowROICalculator={() => navigate('/roi-rechner')}
+      onShowImpressum={() => navigate('/impressum')}
+      onShowDatenschutz={() => navigate('/datenschutz')}
+    />
+  );
+}
+
+function ReferencesPage() {
+  const navigate = useNavigate();
+
+  return (
+    <References
+      onBack={() => navigate('/')}
+      onShowAbout={() => navigate('/uber-uns')}
+      onShowROICalculator={() => navigate('/roi-rechner')}
+      onShowImpressum={() => navigate('/impressum')}
+      onShowDatenschutz={() => navigate('/datenschutz')}
+    />
+  );
+}
+
+function ROICalculatorPage() {
+  const navigate = useNavigate();
+
+  return (
+    <ROICalculator
+      onBack={() => navigate('/')}
+      onShowAbout={() => navigate('/uber-uns')}
+      onShowReferences={() => navigate('/referenzen')}
+      onShowImpressum={() => navigate('/impressum')}
+      onShowDatenschutz={() => navigate('/datenschutz')}
+    />
+  );
+}
+
+function ImpressumPage() {
+  const navigate = useNavigate();
+
+  return (
+    <Impressum
+      onBack={() => navigate('/')}
+      onShowDatenschutz={() => navigate('/datenschutz')}
+    />
+  );
+}
+
+function DatenschutzPage() {
+  const navigate = useNavigate();
+
+  return (
+    <Datenschutz
+      onBack={() => navigate('/')}
+      onShowImpressum={() => navigate('/impressum')}
+    />
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/uber-uns" element={<AboutPage />} />
+      <Route path="/referenzen" element={<ReferencesPage />} />
+      <Route path="/roi-rechner" element={<ROICalculatorPage />} />
+      <Route path="/impressum" element={<ImpressumPage />} />
+      <Route path="/datenschutz" element={<DatenschutzPage />} />
+    </Routes>
   );
 }
 
