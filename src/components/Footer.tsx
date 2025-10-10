@@ -79,18 +79,26 @@ const Footer: React.FC<FooterProps> = ({ onShowImpressum, onShowDatenschutz }) =
               © 2024 SSA Hit. Alle Rechte vorbehalten.
             </div>
             <div className="flex space-x-6 text-sm text-gray-400">
-              <button 
+              <button
                 onClick={onShowDatenschutz}
                 className="hover:text-white transition-colors"
               >
                 Datenschutz
               </button>
-              <button 
+              <button
                 onClick={onShowImpressum}
                 className="hover:text-white transition-colors"
               >
                 Impressum
               </button>
+              <a
+                href="https://go.ssahit.de"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                Login
+              </a>
             </div>
           </div>
         </div>
