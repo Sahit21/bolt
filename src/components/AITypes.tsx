@@ -79,7 +79,7 @@ const AITypes = () => {
             </div>
             
             <h3 className="text-2xl font-bold text-white mb-6 text-center">
-              KI-Support
+         Autohaus
             </h3>
             
             <div className="space-y-4 mb-8">
