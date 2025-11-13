@@ -6,6 +6,7 @@ import References from './components/References';
 import ROICalculator from './components/ROICalculator';
 import Impressum from './components/Impressum';
 import Datenschutz from './components/Datenschutz';
+import CalendarPage from './components/CalendarPage';
 import Hero from './components/Hero';
 import AITypes from './components/AITypes';
 import Features from './components/Features';
@@ -104,6 +105,18 @@ function DatenschutzPage() {
   );
 }
 
+function CalendarPageRoute() {
+  const navigate = useNavigate();
+
+  return (
+    <CalendarPage
+      onBack={() => navigate('/')}
+      onShowImpressum={() => navigate('/impressum')}
+      onShowDatenschutz={() => navigate('/datenschutz')}
+    />
+  );
+}
+
 function App() {
   return (
     <Routes>
@@ -113,6 +126,7 @@ function App() {
       <Route path="/roi-rechner" element={<ROICalculatorPage />} />
       <Route path="/impressum" element={<ImpressumPage />} />
       <Route path="/datenschutz" element={<DatenschutzPage />} />
+      <Route path="/kalender" element={<CalendarPageRoute />} />
     </Routes>
   );
 }
