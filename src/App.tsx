@@ -127,7 +127,6 @@ function App() {
       <Route path="/impressum" element={<ImpressumPage />} />
       <Route path="/datenschutz" element={<DatenschutzPage />} />
       <Route path="/kalender" element={<CalendarPageRoute />} />
-       <Route path="/agb" element={<AgbPage />} />
     </Routes>
   );
 }
