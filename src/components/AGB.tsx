@@ -115,7 +115,7 @@ const AGB: React.FC<AGBProps> = ({ onBack, onShowImpressum, onShowDatenschutz })
           <div className="prose prose-invert max-w-none">
             <div className="space-y-8 text-gray-300">
               <div>
-                <h2 className="text-2xl font-bold text-white mb-4">1. Geltungsbereich</h2>
+                
                 <p>
                
 Allgemeine Geschäftsbedingungen
