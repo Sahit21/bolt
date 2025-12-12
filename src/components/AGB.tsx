@@ -117,56 +117,7 @@ const AGB: React.FC<AGBProps> = ({ onBack, onShowImpressum, onShowDatenschutz })
               <div>
                 <h2 className="text-2xl font-bold text-white mb-4">1. Geltungsbereich</h2>
                 <p>
-                  [Hier können Sie Ihre eigenen AGBs einfügen]
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">2. Vertragsschluss</h2>
-                <p>
-                  [Hier können Sie Ihre eigenen AGBs einfügen]
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">3. Leistungsumfang</h2>
-                <p>
-                  [Hier können Sie Ihre eigenen AGBs einfügen]
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">4. Preise und Zahlungsbedingungen</h2>
-                <p>
-                  [Hier können Sie Ihre eigenen AGBs einfügen]
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">5. Lieferung und Leistungszeit</h2>
-                <p>
-                  [Hier können Sie Ihre eigenen AGBs einfügen]
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">6. Gewährleistung und Haftung</h2>
-                <p>
-                  [Hier können Sie Ihre eigenen AGBs einfügen]
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">7. Datenschutz</h2>
-                <p>
-                  [Hier können Sie Ihre eigenen AGBs einfügen]
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">8. Schlussbestimmungen</h2>
-                <p>
-                  [Hier können Sie Ihre eigenen AGBs einfügen]
+                 AaaaAaaaaaaaaas
                 </p>
               </div>
             </div>
