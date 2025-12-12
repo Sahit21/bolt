@@ -335,6 +335,7 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
         <Footer
           onShowImpressum={onShowImpressum}
           onShowDatenschutz={onShowDatenschutz}
+          onShowAGB={onShowAGB}
         />
       </div>
 

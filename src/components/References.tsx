@@ -236,6 +236,7 @@ const References: React.FC<ReferencesProps> = ({ onBack, onShowAbout, onShowROIC
       <Footer
         onShowImpressum={onShowImpressum}
         onShowDatenschutz={onShowDatenschutz}
+        onShowAGB={onShowAGB}
       />
     </div>
     

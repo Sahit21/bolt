@@ -54,6 +54,7 @@ const CalendarPage: React.FC<CalendarPageProps> = ({ onBack, onShowImpressum, on
         <Footer
           onShowImpressum={onShowImpressum}
           onShowDatenschutz={onShowDatenschutz}
+          onShowAGB={onShowAGB}
         />
       </div>
     </>

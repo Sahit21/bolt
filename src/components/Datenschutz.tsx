@@ -472,6 +472,7 @@ const Datenschutz: React.FC<DatenschutzProps> = ({ onBack, onShowImpressum }) =>
       <Footer
         onShowImpressum={onShowImpressum}
         onShowDatenschutz={() => {}}
+        onShowAGB={onShowAGB}
       />
     </div>
     

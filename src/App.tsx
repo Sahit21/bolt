@@ -6,6 +6,7 @@ import References from './components/References';
 import ROICalculator from './components/ROICalculator';
 import Impressum from './components/Impressum';
 import Datenschutz from './components/Datenschutz';
+import AGB from './components/AGB';
 import CalendarPage from './components/CalendarPage';
 import Hero from './components/Hero';
 import AITypes from './components/AITypes';
@@ -36,6 +37,7 @@ function HomePage() {
       <Footer
         onShowImpressum={() => navigate('/impressum')}
         onShowDatenschutz={() => navigate('/datenschutz')}
+        onShowAGB={() => navigate('/agb')}
       />
     </div>
   );
@@ -51,6 +53,7 @@ function AboutPage() {
       onShowROICalculator={() => navigate('/roi-rechner')}
       onShowImpressum={() => navigate('/impressum')}
       onShowDatenschutz={() => navigate('/datenschutz')}
+      onShowAGB={() => navigate('/agb')}
     />
   );
 }
@@ -65,6 +68,7 @@ function ReferencesPage() {
       onShowROICalculator={() => navigate('/roi-rechner')}
       onShowImpressum={() => navigate('/impressum')}
       onShowDatenschutz={() => navigate('/datenschutz')}
+      onShowAGB={() => navigate('/agb')}
     />
   );
 }
@@ -79,6 +83,7 @@ function ROICalculatorPage() {
       onShowReferences={() => navigate('/referenzen')}
       onShowImpressum={() => navigate('/impressum')}
       onShowDatenschutz={() => navigate('/datenschutz')}
+      onShowAGB={() => navigate('/agb')}
     />
   );
 }
@@ -90,6 +95,7 @@ function ImpressumPage() {
     <Impressum
       onBack={() => navigate('/')}
       onShowDatenschutz={() => navigate('/datenschutz')}
+      onShowAGB={() => navigate('/agb')}
     />
   );
 }
@@ -101,6 +107,7 @@ function DatenschutzPage() {
     <Datenschutz
       onBack={() => navigate('/')}
       onShowImpressum={() => navigate('/impressum')}
+      onShowAGB={() => navigate('/agb')}
     />
   );
 }
@@ -110,6 +117,19 @@ function CalendarPageRoute() {
 
   return (
     <CalendarPage
+      onBack={() => navigate('/')}
+      onShowImpressum={() => navigate('/impressum')}
+      onShowDatenschutz={() => navigate('/datenschutz')}
+      onShowAGB={() => navigate('/agb')}
+    />
+  );
+}
+
+function AGBPage() {
+  const navigate = useNavigate();
+
+  return (
+    <AGB
       onBack={() => navigate('/')}
       onShowImpressum={() => navigate('/impressum')}
       onShowDatenschutz={() => navigate('/datenschutz')}
@@ -126,6 +146,7 @@ function App() {
       <Route path="/roi-rechner" element={<ROICalculatorPage />} />
       <Route path="/impressum" element={<ImpressumPage />} />
       <Route path="/datenschutz" element={<DatenschutzPage />} />
+      <Route path="/agb" element={<AGBPage />} />
       <Route path="/kalender" element={<CalendarPageRoute />} />
     </Routes>
   );

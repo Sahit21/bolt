@@ -4,12 +4,13 @@ import { Menu, X, Calendar, ArrowRight } from 'lucide-react';
 import CalendarPopup from './CalendarPopup';
 import Footer from './Footer';
 
-interface ImpressumProps {
+interface AGBProps {
   onBack: () => void;
+  onShowImpressum?: () => void;
   onShowDatenschutz?: () => void;
 }
 
-const Impressum: React.FC<ImpressumProps> = ({ onBack, onShowDatenschutz }) => {
+const AGB: React.FC<AGBProps> = ({ onBack, onShowImpressum, onShowDatenschutz }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
 
@@ -20,34 +21,31 @@ const Impressum: React.FC<ImpressumProps> = ({ onBack, onShowDatenschutz }) => {
   return (
     <>
     <div className="min-h-screen bg-slate-900">
-      {/* Header with navigation */}
       <header className="bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo - clickable to go back */}
             <button onClick={onBack} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-              <img 
-                src="/Kein Hintergrund.png" 
-                alt="SSA Hit Logo" 
+              <img
+                src="/Kein Hintergrund.png"
+                alt="SSA Hit Logo"
                 className="h-14 w-auto"
               />
             </button>
 
-            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <button 
+              <button
                 onClick={onBack}
                 className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
               >
                 Services
               </button>
-              <button 
+              <button
                 onClick={onBack}
                 className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
               >
                 Referenzen
               </button>
-              <button 
+              <button
                 onClick={onBack}
                 className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
               >
@@ -55,9 +53,8 @@ const Impressum: React.FC<ImpressumProps> = ({ onBack, onShowDatenschutz }) => {
               </button>
             </nav>
 
-            {/* CTA Button */}
             <div className="hidden md:flex items-center space-x-4">
-              <button 
+              <button
                 onClick={() => setIsCalendarOpen(true)}
                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center space-x-2"
               >
@@ -67,7 +64,6 @@ const Impressum: React.FC<ImpressumProps> = ({ onBack, onShowDatenschutz }) => {
               </button>
             </div>
 
-            {/* Mobile menu button */}
             <button
               className="md:hidden p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -76,29 +72,28 @@ const Impressum: React.FC<ImpressumProps> = ({ onBack, onShowDatenschutz }) => {
             </button>
           </div>
 
-          {/* Mobile Navigation */}
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t border-slate-700">
               <div className="flex flex-col space-y-4">
-                <button 
+                <button
                   onClick={onBack}
                   className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
                 >
                   Services
                 </button>
-                <button 
+                <button
                   onClick={onBack}
                   className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
                 >
                   Referenzen
                 </button>
-                <button 
+                <button
                   onClick={onBack}
                   className="text-gray-300 hover:text-blue-400 transition-colors font-medium w-full text-left"
                 >
                   Über uns
                 </button>
-                <button 
+                <button
                   onClick={() => setIsCalendarOpen(true)}
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-full font-semibold flex items-center justify-center space-x-2 w-full"
                 >
@@ -113,79 +108,84 @@ const Impressum: React.FC<ImpressumProps> = ({ onBack, onShowDatenschutz }) => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">
-          Impressum
+          Allgemeine Geschäftsbedingungen
         </h1>
-        
+
         <div className="bg-slate-800 rounded-3xl p-8 border border-slate-700">
           <div className="prose prose-invert max-w-none">
             <div className="space-y-8 text-gray-300">
               <div>
-                <h2 className="text-2xl font-bold text-white mb-4">Angaben gemäß § 5 TMG</h2>
-                <div className="space-y-2">
-                  <p><p>Sahit Luma</p></p>
-                  <p>Software Service Agentur Hit</p>
-                  <p>Wasserkuppenstraße 42</p>
-                  <p>36043, Fulda</p>
-                  <p>Deutschland</p>
-                </div>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">Kontakt</h2>
-                <div className="space-y-2">
-                  <p>Telefon: +49 157 88720205</p>
-                  <p>E-Mail: info@ssahit.de</p>
-                </div>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">Steuernummer</h2>
-                <p>Steuernummer :</p>
-                <p>[18 843 30091]</p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">Redaktionell verantwortlich</h2>
-                <p>Sahit Luma</p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-4">EU-Streitschlichtung</h2>
+                <h2 className="text-2xl font-bold text-white mb-4">1. Geltungsbereich</h2>
                 <p>
-                  Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
-                  <a href="https://ec.europa.eu/consumers/odr/" className="text-blue-400 hover:text-blue-300 ml-1 break-all">
-                    https://ec.europa.eu/consumers/odr/
-                  </a>
+                  [Hier können Sie Ihre eigenen AGBs einfügen]
                 </p>
-                <p>Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-white mb-4">Verbraucherstreitbeilegung
-                  /Universalschlichtungsstelle</h2>
+                <h2 className="text-2xl font-bold text-white mb-4">2. Vertragsschluss</h2>
                 <p>
-                  Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer 
-                  Verbraucherschlichtungsstelle teilzunehmen.
+                  [Hier können Sie Ihre eigenen AGBs einfügen]
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-4">3. Leistungsumfang</h2>
+                <p>
+                  [Hier können Sie Ihre eigenen AGBs einfügen]
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-4">4. Preise und Zahlungsbedingungen</h2>
+                <p>
+                  [Hier können Sie Ihre eigenen AGBs einfügen]
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-4">5. Lieferung und Leistungszeit</h2>
+                <p>
+                  [Hier können Sie Ihre eigenen AGBs einfügen]
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-4">6. Gewährleistung und Haftung</h2>
+                <p>
+                  [Hier können Sie Ihre eigenen AGBs einfügen]
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-4">7. Datenschutz</h2>
+                <p>
+                  [Hier können Sie Ihre eigenen AGBs einfügen]
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-4">8. Schlussbestimmungen</h2>
+                <p>
+                  [Hier können Sie Ihre eigenen AGBs einfügen]
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <Footer
-        onShowImpressum={() => {}}
+        onShowImpressum={onShowImpressum}
         onShowDatenschutz={onShowDatenschutz}
-        onShowAGB={onShowAGB}
       />
     </div>
-    
-    <CalendarPopup 
-      isOpen={isCalendarOpen} 
-      onClose={() => setIsCalendarOpen(false)} 
+
+    <CalendarPopup
+      isOpen={isCalendarOpen}
+      onClose={() => setIsCalendarOpen(false)}
     />
     </>
   );
 };
 
-export default Impressum;
+export default AGB;
