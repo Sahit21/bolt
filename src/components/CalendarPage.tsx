@@ -6,9 +6,10 @@ interface CalendarPageProps {
   onBack: () => void;
   onShowImpressum?: () => void;
   onShowDatenschutz?: () => void;
+  onShowAGB?: () => void;
 }
 
-const CalendarPage: React.FC<CalendarPageProps> = ({ onBack, onShowImpressum, onShowDatenschutz }) => {
+const CalendarPage: React.FC<CalendarPageProps> = ({ onBack, onShowImpressum, onShowDatenschutz, onShowAGB }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   useEffect(() => {

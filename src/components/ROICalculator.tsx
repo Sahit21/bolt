@@ -9,9 +9,10 @@ interface ROICalculatorProps {
   onShowReferences?: () => void;
   onShowImpressum?: () => void;
   onShowDatenschutz?: () => void;
+  onShowAGB?: () => void;
 }
 
-const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onShowReferences, onShowImpressum, onShowDatenschutz }) => {
+const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onShowReferences, onShowImpressum, onShowDatenschutz, onShowAGB }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 

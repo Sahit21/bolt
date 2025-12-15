@@ -10,9 +10,10 @@ interface ReferencesProps {
   onShowROICalculator?: () => void;
   onShowImpressum?: () => void;
   onShowDatenschutz?: () => void;
+  onShowAGB?: () => void;
 }
 
-const References: React.FC<ReferencesProps> = ({ onBack, onShowAbout, onShowROICalculator, onShowImpressum, onShowDatenschutz }) => {
+const References: React.FC<ReferencesProps> = ({ onBack, onShowAbout, onShowROICalculator, onShowImpressum, onShowDatenschutz, onShowAGB }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
 

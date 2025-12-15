@@ -10,9 +10,10 @@ interface AboutProps {
   onShowROICalculator?: () => void;
   onShowImpressum?: () => void;
   onShowDatenschutz?: () => void;
+  onShowAGB?: () => void;
 }
 
-const About: React.FC<AboutProps> = ({ onBack, onShowReferences, onShowROICalculator, onShowImpressum, onShowDatenschutz }) => {
+const About: React.FC<AboutProps> = ({ onBack, onShowReferences, onShowROICalculator, onShowImpressum, onShowDatenschutz, onShowAGB }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
 

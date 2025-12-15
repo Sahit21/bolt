@@ -7,9 +7,10 @@ import Footer from './Footer';
 interface DatenschutzProps {
   onBack: () => void;
   onShowImpressum?: () => void;
+  onShowAGB?: () => void;
 }
 
-const Datenschutz: React.FC<DatenschutzProps> = ({ onBack, onShowImpressum }) => {
+const Datenschutz: React.FC<DatenschutzProps> = ({ onBack, onShowImpressum, onShowAGB }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
 
