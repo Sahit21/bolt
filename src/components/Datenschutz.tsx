@@ -228,16 +228,115 @@ const Datenschutz: React.FC<DatenschutzProps> = ({ onBack, onShowImpressum, onSh
               <div>
                 <h2 className="text-2xl font-bold text-white mb-4">5. Empfänger von personenbezogenen Daten</h2>
                 <p>
-                  Im Rahmen unserer Geschäftstätigkeit arbeiten wir mit verschiedenen externen Stellen zusammen. Dabei 
-                  ist teilweise auch eine Übermittlung von personenbezogenen Daten an diese externen Stellen erforderlich.
-                </p>
-                <p className="mt-2">
-                  Wir geben personenbezogene Daten nur dann an externe Stellen weiter, wenn dies im Rahmen einer 
-                  Vertragserfüllung erforderlich ist, wenn wir gesetzlich hierzu verpflichtet sind (z. B. Weitergabe von Daten 
-                  an Steuerbehörden), wenn wir ein berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO an der Weitergabe haben oder wenn eine sonstige Rechtsgrundlage die Datenweitergabe erlaubt. Beim Einsatz von 
-                  Auftragsverarbeitern geben wir personenbezogene Daten unserer Kunden nur auf Grundlage eines gültigen 
-                  Vertrags über Auftragsverarbeitung weiter. Im Falle einer gemeinsamen Verarbeitung wird ein Vertrag über 
-                  gemeinsame Verarbeitung geschlossen.
+                  <p>
+  Im Rahmen unserer Geschäftstätigkeit arbeiten wir mit verschiedenen externen Stellen zusammen. Dabei
+  ist teilweise auch eine Übermittlung von personenbezogenen Daten an diese externen Stellen erforderlich.
+</p>
+
+<p className="mt-2">
+  Wir geben personenbezogene Daten nur dann an externe Stellen weiter, wenn dies im Rahmen einer
+  Vertragserfüllung erforderlich ist, wenn wir gesetzlich hierzu verpflichtet sind (z. B. Weitergabe von Daten
+  an Steuerbehörden), wenn wir ein berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO an der Weitergabe
+  haben oder wenn eine sonstige Rechtsgrundlage die Datenweitergabe erlaubt. Beim Einsatz von
+  Auftragsverarbeitern geben wir personenbezogene Daten unserer Kunden nur auf Grundlage eines gültigen
+  Vertrags über Auftragsverarbeitung weiter. Im Falle einer gemeinsamen Verarbeitung wird ein Vertrag über
+  gemeinsame Verarbeitung geschlossen.
+</p>
+
+<h3 className="mt-6 font-semibold">
+  Einsatz von Auftragsverarbeitern (n8n / technische Infrastruktur)
+</h3>
+
+<p className="mt-2">
+  Zur technischen Umsetzung von Automatisierungs- und Integrationsprozessen (z. B. Betrieb der
+  Automatisierungsplattform n8n) setzen wir externe Dienstleister ein, die personenbezogene Daten
+  ausschließlich in unserem Auftrag und auf Grundlage dokumentierter Weisungen verarbeiten.
+</p>
+
+<p className="mt-2">
+  Hierbei handelt es sich insbesondere um folgende Kategorien von Dienstleistern:
+</p>
+
+<p className="mt-2 font-medium">
+  Hosting- und Infrastruktur-Dienstleister
+</p>
+
+<p className="mt-2">
+  Unser eingesetzter Hosting-Dienstleister ist:
+</p>
+
+<p className="mt-2">
+  <strong>Hostinger International Ltd.</strong><br />
+  61 Lordou Vironos Street,<br />
+  6023 Larnaca,<br />
+  Zypern
+</p>
+
+<p className="mt-2">
+  bzw.
+</p>
+
+<p className="mt-2">
+  <strong>Hostinger UK Limited</strong><br />
+  Nwms Center, 31 Southampton Row,<br />
+  Office 3.11, 3rd Floor,<br />
+  London, WC1B 5HJ,<br />
+  Vereinigtes Königreich
+</p>
+
+<p className="mt-2">
+  Die Verarbeitung personenbezogener Daten erfolgt im Rahmen einer Auftragsverarbeitung gemäß Art. 28
+  DSGVO. Mit dem Dienstleister besteht ein entsprechender Vertrag zur Auftragsverarbeitung (Data
+  Processing Addendum).
+</p>
+
+<p className="mt-2">
+  Die Verarbeitung erfolgt auf Servern innerhalb der Europäischen Union.
+</p>
+
+<p className="mt-2">
+  Im Rahmen der eingesetzten Automatisierungs- und Integrationsprozesse erfolgt keine dauerhafte
+  Speicherung personenbezogener Daten. Protokoll- und Ausführungsdaten (Execution Logs) werden nicht
+  langfristig gespeichert, sondern sind deaktiviert oder zeitlich begrenzt, soweit sie aus technischen Gründen
+  kurzfristig erforderlich sind.
+</p>
+
+<p className="mt-2">
+  Eine Analyse, Auswertung oder Nutzung der verarbeiteten personenbezogenen Daten zu eigenen Zwecken
+  findet nicht statt. Die Verarbeitung erfolgt ausschließlich zur technischen Umsetzung der jeweils
+  beauftragten Leistungen.
+</p>
+
+<p className="mt-2">
+  Für alle im Rahmen der Automatisierungsprozesse verarbeiteten personenbezogenen Daten sind
+  automatische Löschfristen definiert und aktiv. Die Löschung erfolgt nach Wegfall des Verarbeitungszwecks
+  oder nach Ablauf der festgelegten Fristen. Eine darüberhinausgehende Speicherung findet nicht statt.
+</p>
+
+<p className="mt-2">
+  Weitere Informationen zur Datenverarbeitung durch Hostinger finden Sie unter:
+</p>
+
+<p className="mt-1">
+  <a
+    href="https://www.hostinger.com/legal/privacy-policy"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    https://www.hostinger.com/legal/privacy-policy
+  </a>
+</p>
+
+<p className="mt-1">
+  <a
+    href="https://www.hostinger.com/legal/data-processing-agreement"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    https://www.hostinger.com/legal/data-processing-agreement
+  </a>
+</p>
+
                 </p>
               </div>
 
