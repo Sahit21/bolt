@@ -267,22 +267,22 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
 
                 <div className="space-y-4">
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-blue-400" />
+                    <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-6 h-6 text-orange-400" />
                     </div>
                     <div className="flex-1">
-                      <div className="text-gray-400 text-sm mb-1">Zeitersparnis</div>
-                      <div className="text-2xl font-bold text-white">{results.monthlyTimeSaved} Stunden</div>
+                      <div className="text-gray-400 text-sm mb-1">Zeitersparnis Routine</div>
+                      <div className="text-2xl font-bold text-white">{results.monthlyRoutineTimeSaved} Stunden</div>
                     </div>
                   </div>
 
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <DollarSign className="w-6 h-6 text-green-400" />
+                    <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <DollarSign className="w-6 h-6 text-emerald-400" />
                     </div>
                     <div className="flex-1">
-                      <div className="text-gray-400 text-sm mb-1">Personalkostenersparnis</div>
-                      <div className="text-2xl font-bold text-white">€{results.monthlyPersonnelSavings.toLocaleString()}</div>
+                      <div className="text-gray-400 text-sm mb-1">Geldersparnis Routine</div>
+                      <div className="text-2xl font-bold text-white">€{results.monthlyRoutineSavings.toLocaleString()}</div>
                     </div>
                   </div>
 
@@ -326,13 +326,13 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-blue-100 text-sm">Zeitersparnis</span>
-                    <span className="text-xl font-bold text-white">{results.yearlyTimeSaved} Std</span>
+                    <span className="text-blue-100 text-sm">Zeitersparnis Routine</span>
+                    <span className="text-xl font-bold text-white">{results.yearlyRoutineTimeSaved} Std</span>
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <span className="text-blue-100 text-sm">Personalkostenersparnis</span>
-                    <span className="text-xl font-bold text-white">€ {results.yearlyPersonnelSavings.toLocaleString()}</span>
+                    <span className="text-blue-100 text-sm">Geldersparnis Routine</span>
+                    <span className="text-xl font-bold text-white">€ {results.yearlyRoutineSavings.toLocaleString()}</span>
                   </div>
 
                   <div className="flex justify-between items-center">
