@@ -21,6 +21,8 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
   const [avgProcessingTime, setAvgProcessingTime] = useState(5);
   const [hourlyWage, setHourlyWage] = useState(26);
   const [routinePercent, setRoutinePercent] = useState(70);
+  const [investmentAmount, setInvestmentAmount] = useState(5000);
+  const [subsidyPercent, setSubsidyPercent] = useState(0);
 
   const [results, setResults] = useState({
     monthlyTimeSaved: 0,
@@ -32,7 +34,12 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
     yearlyPersonnelSavings: 0,
     yearlyMoreCalls: 0,
     yearlyRoutineTimeSaved: 0,
-    yearlyRoutineSavings: 0
+    yearlyRoutineSavings: 0,
+    investmentTotal: 0,
+    subsidyAmount: 0,
+    netInvestment: 0,
+    paybackMonths: 0,
+    paybackYears: 0
   });
 
   useEffect(() => {
@@ -58,6 +65,11 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
     const monthlyCostSaved = monthlySavedHours * hourlyWage;
     const yearlyCostSaved = yearlySavedHours * hourlyWage;
 
+    const subsidyAmount = investmentAmount * (subsidyPercent / 100);
+    const netInvestment = investmentAmount - subsidyAmount;
+    const paybackMonths = monthlyCostSaved > 0 ? netInvestment / monthlyCostSaved : 0;
+    const paybackYears = paybackMonths / 12;
+
     setResults({
       monthlyTimeSaved: Math.round(monthlySavedHours),
       monthlyPersonnelSavings: Math.round(monthlyCostSaved),
@@ -68,9 +80,14 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
       yearlyPersonnelSavings: Math.round(yearlyCostSaved),
       yearlyMoreCalls: Math.round(yearlyMoreCalls),
       yearlyRoutineTimeSaved: Math.round(yearlySavedHours * 10) / 10,
-      yearlyRoutineSavings: Math.round(yearlyCostSaved)
+      yearlyRoutineSavings: Math.round(yearlyCostSaved),
+      investmentTotal: investmentAmount,
+      subsidyAmount: Math.round(subsidyAmount),
+      netInvestment: Math.round(netInvestment),
+      paybackMonths: Math.round(paybackMonths * 10) / 10,
+      paybackYears: Math.round(paybackYears * 10) / 10
     });
-  }, [callsPerWeek, unansweredPercent, avgProcessingTime, hourlyWage, routinePercent]);
+  }, [callsPerWeek, unansweredPercent, avgProcessingTime, hourlyWage, routinePercent, investmentAmount, subsidyPercent]);
 
   return (
     <>
@@ -250,6 +267,37 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
                     <span className="text-gray-400 text-sm w-16">%</span>
                   </div>
                 </div>
+
+                <div>
+                  <label className="block text-gray-300 text-sm font-medium mb-3">
+                    Investitionssumme
+                  </label>
+                  <div className="flex items-baseline space-x-2 justify-end">
+                    <span className="text-gray-400 text-sm">€</span>
+                    <input
+                      type="number"
+                      value={investmentAmount}
+                      onChange={(e) => setInvestmentAmount(Math.max(0, Number(e.target.value)))}
+                      className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                    />
+                    <span className="text-gray-400 text-sm w-16"></span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-gray-300 text-sm font-medium mb-3">
+                    Förderung
+                  </label>
+                  <div className="flex items-baseline space-x-2 justify-end">
+                    <input
+                      type="number"
+                      value={subsidyPercent}
+                      onChange={(e) => setSubsidyPercent(Math.max(0, Math.min(100, Number(e.target.value))))}
+                      className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                    />
+                    <span className="text-gray-400 text-sm w-16">%</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -309,6 +357,49 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
                     <span className="text-xl font-bold text-white">{results.yearlyMoreCalls} Anrufe</span>
                   </div>
 
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50">
+            <div className="flex items-center space-x-3 mb-8">
+              <DollarSign className="w-6 h-6 text-green-400" />
+              <h2 className="text-xl font-semibold text-white">Investition & Amortisierung</h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg border border-slate-600">
+                  <span className="text-gray-300">Investitionssumme</span>
+                  <span className="text-xl font-bold text-white">€{results.investmentTotal.toLocaleString()}</span>
+                </div>
+
+                <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg border border-slate-600">
+                  <span className="text-gray-300">Förderung</span>
+                  <span className="text-xl font-bold text-emerald-400">€{results.subsidyAmount.toLocaleString()}</span>
+                </div>
+
+                <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg border border-slate-600">
+                  <span className="text-gray-300">Netto-Investition</span>
+                  <span className="text-xl font-bold text-white">€{results.netInvestment.toLocaleString()}</span>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-900 to-blue-800 rounded-lg border border-blue-600">
+                  <span className="text-gray-200">Monatliche Einsparungen</span>
+                  <span className="text-xl font-bold text-white">€{results.monthlyRoutineSavings.toLocaleString()}</span>
+                </div>
+
+                <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-lg border border-emerald-600">
+                  <span className="text-gray-200">Amortisierungszeit</span>
+                  <span className="text-xl font-bold text-white">{results.paybackMonths} Monate</span>
+                </div>
+
+                <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-lg border border-emerald-600">
+                  <span className="text-gray-200">Amortisierungszeit (Jahre)</span>
+                  <span className="text-xl font-bold text-white">{results.paybackYears} Jahre</span>
                 </div>
               </div>
             </div>
