@@ -317,19 +317,6 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
                     <span className="text-xl font-bold text-white">{results.yearlyMoreCalls} Anrufe</span>
                   </div>
 
-                  <div className="border-t border-blue-500/30 pt-4 mt-4">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-blue-100 text-xs font-medium uppercase">Nur Routine ({routinePercent}%)</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-blue-100 text-sm">Zeitersparnis (Routine)</span>
-                      <span className="text-xl font-bold text-white">{results.yearlyRoutineTimeSaved} Std</span>
-                    </div>
-                    <div className="flex justify-between items-center mt-2">
-                      <span className="text-blue-100 text-sm">Geldersparnis (Routine)</span>
-                      <span className="text-xl font-bold text-white">€ {results.yearlyRoutineSavings.toLocaleString()}</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
