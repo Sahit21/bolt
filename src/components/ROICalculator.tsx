@@ -267,37 +267,6 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
                     <span className="text-gray-400 text-sm w-16">%</span>
                   </div>
                 </div>
-
-                <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-3">
-                    Investitionssumme
-                  </label>
-                  <div className="flex items-baseline space-x-2 justify-end">
-                    <span className="text-gray-400 text-sm">€</span>
-                    <input
-                      type="number"
-                      value={investmentAmount}
-                      onChange={(e) => setInvestmentAmount(Math.max(0, Number(e.target.value)))}
-                      className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
-                    />
-                    <span className="text-gray-400 text-sm w-16"></span>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-3">
-                    Förderung
-                  </label>
-                  <div className="flex items-baseline space-x-2 justify-end">
-                    <input
-                      type="number"
-                      value={subsidyPercent}
-                      onChange={(e) => setSubsidyPercent(Math.max(0, Math.min(100, Number(e.target.value))))}
-                      className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
-                    />
-                    <span className="text-gray-400 text-sm w-16">%</span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -368,21 +337,58 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
               <h2 className="text-xl font-semibold text-white">Investition & Amortisierung</h2>
             </div>
 
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <div>
+                <label className="block text-gray-300 text-sm font-medium mb-3">
+                  Investitionssumme
+                </label>
+                <div className="flex items-baseline space-x-2">
+                  <span className="text-gray-400 text-sm">€</span>
+                  <input
+                    type="number"
+                    value={investmentAmount}
+                    onChange={(e) => setInvestmentAmount(Math.max(0, Number(e.target.value)))}
+                    className="bg-slate-700/50 text-white px-3 py-2 rounded-lg flex-1 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-gray-300 text-sm font-medium mb-3">
+                  Förderung (%)
+                </label>
+                <div className="flex items-baseline space-x-2">
+                  <input
+                    type="number"
+                    value={subsidyPercent}
+                    onChange={(e) => setSubsidyPercent(Math.max(0, Math.min(100, Number(e.target.value))))}
+                    className="bg-slate-700/50 text-white px-3 py-2 rounded-lg flex-1 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                  />
+                  <span className="text-gray-400 text-sm">%</span>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-gray-300 text-sm font-medium mb-3">
+                  Netto-Investition
+                </label>
+                <div className="flex items-center px-3 py-2 rounded-lg bg-slate-700/30 border border-slate-600">
+                  <span className="text-gray-400 text-sm mr-2">€</span>
+                  <span className="text-xl font-bold text-white">{results.netInvestment.toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg border border-slate-600">
-                  <span className="text-gray-300">Investitionssumme</span>
-                  <span className="text-xl font-bold text-white">€{results.investmentTotal.toLocaleString()}</span>
-                </div>
-
-                <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg border border-slate-600">
-                  <span className="text-gray-300">Förderung</span>
+                  <span className="text-gray-300">Förderamount</span>
                   <span className="text-xl font-bold text-emerald-400">€{results.subsidyAmount.toLocaleString()}</span>
                 </div>
 
                 <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg border border-slate-600">
-                  <span className="text-gray-300">Netto-Investition</span>
-                  <span className="text-xl font-bold text-white">€{results.netInvestment.toLocaleString()}</span>
+                  <span className="text-gray-300">Investitionssumme</span>
+                  <span className="text-xl font-bold text-white">€{results.investmentTotal.toLocaleString()}</span>
                 </div>
               </div>
 
