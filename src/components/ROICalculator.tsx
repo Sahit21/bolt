@@ -20,14 +20,19 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
   const [unansweredPercent, setUnansweredPercent] = useState(20);
   const [avgProcessingTime, setAvgProcessingTime] = useState(5);
   const [hourlyWage, setHourlyWage] = useState(26);
+  const [routinePercent, setRoutinePercent] = useState(70);
 
   const [results, setResults] = useState({
     monthlyTimeSaved: 0,
     monthlyPersonnelSavings: 0,
     monthlyMoreCalls: 0,
+    monthlyRoutineTimeSaved: 0,
+    monthlyRoutineSavings: 0,
     yearlyTimeSaved: 0,
     yearlyPersonnelSavings: 0,
-    yearlyMoreCalls: 0
+    yearlyMoreCalls: 0,
+    yearlyRoutineTimeSaved: 0,
+    yearlyRoutineSavings: 0
   });
 
   useEffect(() => {
@@ -53,15 +58,27 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
     const monthlyMoreCalls = unansweredCallsPerWeek * weeksPerMonth;
     const yearlyMoreCalls = monthlyMoreCalls * monthsPerYear;
 
+    const routineCallsPerWeek = answeredCallsPerWeek * (routinePercent / 100);
+    const routineTimeSavedPerWeekHours = (routineCallsPerWeek * avgProcessingTime / 60) * automationRate;
+    const monthlyRoutineTimeSaved = routineTimeSavedPerWeekHours * weeksPerMonth;
+    const yearlyRoutineTimeSaved = monthlyRoutineTimeSaved * monthsPerYear;
+
+    const monthlyRoutineSavings = monthlyRoutineTimeSaved * hourlyWage;
+    const yearlyRoutineSavings = yearlyRoutineTimeSaved * hourlyWage;
+
     setResults({
       monthlyTimeSaved: Math.round(monthlyTimeSaved),
       monthlyPersonnelSavings: Math.round(monthlyPersonnelSavings),
       monthlyMoreCalls: Math.round(monthlyMoreCalls),
+      monthlyRoutineTimeSaved: Math.round(monthlyRoutineTimeSaved),
+      monthlyRoutineSavings: Math.round(monthlyRoutineSavings),
       yearlyTimeSaved: Math.round(yearlyTimeSaved * 10) / 10,
       yearlyPersonnelSavings: Math.round(yearlyPersonnelSavings),
-      yearlyMoreCalls: Math.round(yearlyMoreCalls)
+      yearlyMoreCalls: Math.round(yearlyMoreCalls),
+      yearlyRoutineTimeSaved: Math.round(yearlyRoutineTimeSaved * 10) / 10,
+      yearlyRoutineSavings: Math.round(yearlyRoutineSavings)
     });
-  }, [callsPerWeek, unansweredPercent, avgProcessingTime, hourlyWage]);
+  }, [callsPerWeek, unansweredPercent, avgProcessingTime, hourlyWage, routinePercent]);
 
   return (
     <>
@@ -226,6 +243,21 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
                     <span className="text-gray-400 text-sm w-16">/Std</span>
                   </div>
                 </div>
+
+                <div>
+                  <label className="block text-gray-300 text-sm font-medium mb-3">
+                    % Routine-Fragen (z.B. Öffnungszeiten, Weiterleitung)
+                  </label>
+                  <div className="flex items-baseline space-x-2 justify-end">
+                    <input
+                      type="number"
+                      value={routinePercent}
+                      onChange={(e) => setRoutinePercent(Math.max(0, Math.min(100, Number(e.target.value))))}
+                      className="bg-slate-700/50 text-white text-right px-3 py-1 rounded-lg w-24 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                    />
+                    <span className="text-gray-400 text-sm w-16">%</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -263,6 +295,29 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
                       <div className="text-2xl font-bold text-white">{results.monthlyMoreCalls} Anrufe</div>
                     </div>
                   </div>
+
+                  <div className="border-t border-slate-700 pt-4 mt-4">
+                    <div className="text-gray-400 text-xs font-medium mb-3 uppercase">Nur Routine-Fragen ({routinePercent}%)</div>
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <Clock className="w-6 h-6 text-orange-400" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-gray-400 text-sm mb-1">Zeitersparnis (Routine)</div>
+                        <div className="text-2xl font-bold text-white">{results.monthlyRoutineTimeSaved} Stunden</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-4 mt-4">
+                      <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <DollarSign className="w-6 h-6 text-emerald-400" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-gray-400 text-sm mb-1">Geldersparnis (Routine)</div>
+                        <div className="text-2xl font-bold text-white">€{results.monthlyRoutineSavings.toLocaleString()}</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -283,6 +338,20 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
                   <div className="flex justify-between items-center">
                     <span className="text-blue-100 text-sm">Mehr entgegengenommene Anrufe</span>
                     <span className="text-xl font-bold text-white">{results.yearlyMoreCalls} Anrufe</span>
+                  </div>
+
+                  <div className="border-t border-blue-500/30 pt-4 mt-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-blue-100 text-xs font-medium uppercase">Nur Routine ({routinePercent}%)</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-blue-100 text-sm">Zeitersparnis (Routine)</span>
+                      <span className="text-xl font-bold text-white">{results.yearlyRoutineTimeSaved} Std</span>
+                    </div>
+                    <div className="flex justify-between items-center mt-2">
+                      <span className="text-blue-100 text-sm">Geldersparnis (Routine)</span>
+                      <span className="text-xl font-bold text-white">€ {results.yearlyRoutineSavings.toLocaleString()}</span>
+                    </div>
                   </div>
                 </div>
               </div>
