@@ -40,43 +40,35 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
   }, []);
 
   useEffect(() => {
-    const automationRate = 0.8;
     const weeksPerMonth = 4.33;
     const monthsPerYear = 12;
 
     const totalCallsPerWeek = callsPerWeek;
     const answeredCallsPerWeek = totalCallsPerWeek * (1 - unansweredPercent / 100);
 
-    const timeSavedPerWeekHours = (answeredCallsPerWeek * avgProcessingTime / 60) * automationRate;
-    const monthlyTimeSaved = timeSavedPerWeekHours * weeksPerMonth;
-    const yearlyTimeSaved = monthlyTimeSaved * monthsPerYear;
-
-    const monthlyPersonnelSavings = monthlyTimeSaved * hourlyWage;
-    const yearlyPersonnelSavings = yearlyTimeSaved * hourlyWage;
-
     const unansweredCallsPerWeek = totalCallsPerWeek * (unansweredPercent / 100);
     const monthlyMoreCalls = unansweredCallsPerWeek * weeksPerMonth;
     const yearlyMoreCalls = monthlyMoreCalls * monthsPerYear;
 
-    const routineCallsPerWeek = answeredCallsPerWeek * (routinePercent / 100);
-    const routineTimeSavedPerWeekHours = (routineCallsPerWeek * avgProcessingTime / 60) * automationRate;
-    const monthlyRoutineTimeSaved = routineTimeSavedPerWeekHours * weeksPerMonth;
-    const yearlyRoutineTimeSaved = monthlyRoutineTimeSaved * monthsPerYear;
+    const weeklyRoutineCalls = answeredCallsPerWeek * (routinePercent / 100);
+    const weeklySavedHours = weeklyRoutineCalls * avgProcessingTime / 60;
+    const monthlySavedHours = weeklySavedHours * weeksPerMonth;
+    const yearlySavedHours = monthlySavedHours * monthsPerYear;
 
-    const monthlyRoutineSavings = monthlyRoutineTimeSaved * hourlyWage;
-    const yearlyRoutineSavings = yearlyRoutineTimeSaved * hourlyWage;
+    const monthlyCostSaved = monthlySavedHours * hourlyWage;
+    const yearlyCostSaved = yearlySavedHours * hourlyWage;
 
     setResults({
-      monthlyTimeSaved: Math.round(monthlyTimeSaved),
-      monthlyPersonnelSavings: Math.round(monthlyPersonnelSavings),
+      monthlyTimeSaved: Math.round(monthlySavedHours),
+      monthlyPersonnelSavings: Math.round(monthlyCostSaved),
       monthlyMoreCalls: Math.round(monthlyMoreCalls),
-      monthlyRoutineTimeSaved: Math.round(monthlyRoutineTimeSaved),
-      monthlyRoutineSavings: Math.round(monthlyRoutineSavings),
-      yearlyTimeSaved: Math.round(yearlyTimeSaved * 10) / 10,
-      yearlyPersonnelSavings: Math.round(yearlyPersonnelSavings),
+      monthlyRoutineTimeSaved: Math.round(monthlySavedHours),
+      monthlyRoutineSavings: Math.round(monthlyCostSaved),
+      yearlyTimeSaved: Math.round(yearlySavedHours * 10) / 10,
+      yearlyPersonnelSavings: Math.round(yearlyCostSaved),
       yearlyMoreCalls: Math.round(yearlyMoreCalls),
-      yearlyRoutineTimeSaved: Math.round(yearlyRoutineTimeSaved * 10) / 10,
-      yearlyRoutineSavings: Math.round(yearlyRoutineSavings)
+      yearlyRoutineTimeSaved: Math.round(yearlySavedHours * 10) / 10,
+      yearlyRoutineSavings: Math.round(yearlyCostSaved)
     });
   }, [callsPerWeek, unansweredPercent, avgProcessingTime, hourlyWage, routinePercent]);
 
