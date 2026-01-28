@@ -379,34 +379,20 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg border border-slate-600">
-                  <span className="text-gray-300">Förderamount</span>
-                  <span className="text-xl font-bold text-emerald-400">€{results.subsidyAmount.toLocaleString()}</span>
-                </div>
-
-                <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg border border-slate-600">
-                  <span className="text-gray-300">Investitionssumme</span>
-                  <span className="text-xl font-bold text-white">€{results.investmentTotal.toLocaleString()}</span>
-                </div>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-900 to-blue-800 rounded-lg border border-blue-600">
+                <span className="text-gray-200">Monatliche Einsparungen</span>
+                <span className="text-xl font-bold text-white">€{results.monthlyRoutineSavings.toLocaleString()}</span>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-900 to-blue-800 rounded-lg border border-blue-600">
-                  <span className="text-gray-200">Monatliche Einsparungen</span>
-                  <span className="text-xl font-bold text-white">€{results.monthlyRoutineSavings.toLocaleString()}</span>
-                </div>
+              <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-lg border border-emerald-600">
+                <span className="text-gray-200">Amortisierungszeit</span>
+                <span className="text-xl font-bold text-white">{results.paybackMonths} Monate</span>
+              </div>
 
-                <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-lg border border-emerald-600">
-                  <span className="text-gray-200">Amortisierungszeit</span>
-                  <span className="text-xl font-bold text-white">{results.paybackMonths} Monate</span>
-                </div>
-
-                <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-lg border border-emerald-600">
-                  <span className="text-gray-200">Amortisierungszeit (Jahre)</span>
-                  <span className="text-xl font-bold text-white">{results.paybackYears} Jahre</span>
-                </div>
+              <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-lg border border-emerald-600">
+                <span className="text-gray-200">Amortisierungszeit (Jahre)</span>
+                <span className="text-xl font-bold text-white">{results.paybackYears} Jahre</span>
               </div>
             </div>
           </div>
