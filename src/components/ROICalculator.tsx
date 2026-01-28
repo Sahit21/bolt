@@ -329,7 +329,7 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
               <div>
                 <h4 className="text-blue-400 font-medium mb-2">Zeitersparnis:</h4>
                 <p className="text-gray-300 text-sm leading-relaxed">
-                  Automatisierung von 80% der Anrufe spart wertvolle Arbeitszeit.
+                  KI-Automatisierung reduziert manuelle Arbeitszeit erheblich und gibt Ihren Teams wertvolle Zeit zurück.
                 </p>
               </div>
 
