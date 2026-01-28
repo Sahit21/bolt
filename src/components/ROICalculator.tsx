@@ -21,7 +21,7 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
   const [avgProcessingTime, setAvgProcessingTime] = useState(5);
   const [hourlyWage, setHourlyWage] = useState(26);
   const [routinePercent, setRoutinePercent] = useState(70);
-  const [investmentAmount, setInvestmentAmount] = useState(5000);
+  const [investmentAmount, setInvestmentAmount] = useState(0);
   const [subsidyPercent, setSubsidyPercent] = useState(0);
 
   const [results, setResults] = useState({
