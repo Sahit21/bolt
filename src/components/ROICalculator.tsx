@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, TrendingUp, ArrowRight, Calendar, Menu, X, Users, Clock, DollarSign } from 'lucide-react';
+import { Calculator, TrendingUp, ArrowRight, Calendar, Menu, X, Users, Clock, DollarSign, ChevronDown } from 'lucide-react';
 import CalendarPopup from './CalendarPopup';
 import Footer from './Footer';
 
@@ -15,6 +15,7 @@ interface ROICalculatorProps {
 const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onShowReferences, onShowImpressum, onShowDatenschutz, onShowAGB }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [isInvestmentOpen, setIsInvestmentOpen] = useState(false);
 
   const [callsPerWeek, setCallsPerWeek] = useState(180);
   const [unansweredPercent, setUnansweredPercent] = useState(20);
@@ -331,70 +332,80 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ onBack, onShowAbout, onSh
             </div>
           </div>
 
-          <div className="mt-12 bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50">
-            <div className="flex items-center space-x-3 mb-8">
-              <DollarSign className="w-6 h-6 text-green-400" />
-              <h2 className="text-xl font-semibold text-white">Investition & Amortisierung</h2>
-            </div>
+          <div className="mt-12 bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 overflow-hidden">
+            <button
+              onClick={() => setIsInvestmentOpen(!isInvestmentOpen)}
+              className="w-full p-8 flex items-center justify-between hover:bg-slate-800/70 transition-colors"
+            >
+              <div className="flex items-center space-x-3">
+                <DollarSign className="w-6 h-6 text-green-400" />
+                <h2 className="text-xl font-semibold text-white">Investition & Amortisierung</h2>
+              </div>
+              <ChevronDown className={`w-6 h-6 text-gray-400 transition-transform duration-300 ${isInvestmentOpen ? 'rotate-180' : ''}`} />
+            </button>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-              <div>
-                <label className="block text-gray-300 text-sm font-medium mb-3">
-                  Investitionssumme
-                </label>
-                <div className="flex items-baseline space-x-2">
-                  <span className="text-gray-400 text-sm">€</span>
-                  <input
-                    type="number"
-                    value={investmentAmount}
-                    onChange={(e) => setInvestmentAmount(Math.max(0, Number(e.target.value)))}
-                    className="bg-slate-700/50 text-white px-3 py-2 rounded-lg flex-1 border border-slate-600 focus:border-blue-500 focus:outline-none"
-                  />
+            {isInvestmentOpen && (
+              <div className="px-8 pb-8 border-t border-slate-700/50">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 pt-8">
+                  <div>
+                    <label className="block text-gray-300 text-sm font-medium mb-3">
+                      Investitionssumme
+                    </label>
+                    <div className="flex items-baseline space-x-2">
+                      <span className="text-gray-400 text-sm">€</span>
+                      <input
+                        type="number"
+                        value={investmentAmount}
+                        onChange={(e) => setInvestmentAmount(Math.max(0, Number(e.target.value)))}
+                        className="bg-slate-700/50 text-white px-3 py-2 rounded-lg flex-1 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-300 text-sm font-medium mb-3">
+                      Förderung (%)
+                    </label>
+                    <div className="flex items-baseline space-x-2">
+                      <input
+                        type="number"
+                        value={subsidyPercent}
+                        onChange={(e) => setSubsidyPercent(Math.max(0, Math.min(100, Number(e.target.value))))}
+                        className="bg-slate-700/50 text-white px-3 py-2 rounded-lg flex-1 border border-slate-600 focus:border-blue-500 focus:outline-none"
+                      />
+                      <span className="text-gray-400 text-sm">%</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-300 text-sm font-medium mb-3">
+                      Netto-Investition
+                    </label>
+                    <div className="flex items-center px-3 py-2 rounded-lg bg-slate-700/30 border border-slate-600">
+                      <span className="text-gray-400 text-sm mr-2">€</span>
+                      <span className="text-xl font-bold text-white">{results.netInvestment.toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-900 to-blue-800 rounded-lg border border-blue-600">
+                    <span className="text-gray-200">Monatliche Einsparungen</span>
+                    <span className="text-xl font-bold text-white">€{results.monthlyRoutineSavings.toLocaleString()}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-lg border border-emerald-600">
+                    <span className="text-gray-200">Amortisierungszeit</span>
+                    <span className="text-xl font-bold text-white">{results.paybackMonths} Monate</span>
+                  </div>
+
+                  <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-lg border border-emerald-600">
+                    <span className="text-gray-200">Amortisierungszeit (Jahre)</span>
+                    <span className="text-xl font-bold text-white">{results.paybackYears} Jahre</span>
+                  </div>
                 </div>
               </div>
-
-              <div>
-                <label className="block text-gray-300 text-sm font-medium mb-3">
-                  Förderung (%)
-                </label>
-                <div className="flex items-baseline space-x-2">
-                  <input
-                    type="number"
-                    value={subsidyPercent}
-                    onChange={(e) => setSubsidyPercent(Math.max(0, Math.min(100, Number(e.target.value))))}
-                    className="bg-slate-700/50 text-white px-3 py-2 rounded-lg flex-1 border border-slate-600 focus:border-blue-500 focus:outline-none"
-                  />
-                  <span className="text-gray-400 text-sm">%</span>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-gray-300 text-sm font-medium mb-3">
-                  Netto-Investition
-                </label>
-                <div className="flex items-center px-3 py-2 rounded-lg bg-slate-700/30 border border-slate-600">
-                  <span className="text-gray-400 text-sm mr-2">€</span>
-                  <span className="text-xl font-bold text-white">{results.netInvestment.toLocaleString()}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-900 to-blue-800 rounded-lg border border-blue-600">
-                <span className="text-gray-200">Monatliche Einsparungen</span>
-                <span className="text-xl font-bold text-white">€{results.monthlyRoutineSavings.toLocaleString()}</span>
-              </div>
-
-              <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-lg border border-emerald-600">
-                <span className="text-gray-200">Amortisierungszeit</span>
-                <span className="text-xl font-bold text-white">{results.paybackMonths} Monate</span>
-              </div>
-
-              <div className="flex justify-between items-center p-4 bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-lg border border-emerald-600">
-                <span className="text-gray-200">Amortisierungszeit (Jahre)</span>
-                <span className="text-xl font-bold text-white">{results.paybackYears} Jahre</span>
-              </div>
-            </div>
+            )}
           </div>
 
           <div className="mt-8 bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50">
